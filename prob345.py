@@ -8,7 +8,7 @@ class Solution(object):
         m = len(s)
         j = m - 1
         l = list(s)
-        v = "aeiouAEIOU"
+        v = set("aeiouAEIOU")
         while i < j:
             while l[i] not in v and i + 1 < m:
                 i += 1
