@@ -18,5 +18,26 @@ class Solution(object):
                 return i
         return -1
 
-
-
+# O(n)
+class Solution(object):
+    
+    def firstUniqChar(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        f = {}
+        for i, c in enumerate(s):
+            if c in f:
+                f[c] = -1
+            else:
+                f[c] = i
+        pairs = sorted(filter(lambda x : x[1] != -1, f.items()), 
+                        key = lambda x: x[1])
+        if pairs:
+            return pairs[0][1]
+        else:
+            return -1 
+        
+            
+        
