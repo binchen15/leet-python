@@ -47,3 +47,17 @@ class Solution(object):
                 j += 1
         return False
 
+
+class Solution(object): 
+    """fastest method right now"""
+    def isSubsequence(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        i = 0
+        for c in s:
+            pos = t[i:].find(c)
+
+
