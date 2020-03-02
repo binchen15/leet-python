@@ -1,4 +1,5 @@
 class Solution(object):
+    """slow"""
     def nextGreatestLetter(self, letters, target):
         """
         :type letters: List[str]
@@ -17,3 +18,15 @@ class Solution(object):
                 h = mid
         return letters[l]
         
+
+class Solution(object):
+    def nextGreatestLetter(self, letters, target):
+        """
+        :type letters: List[str]
+        :type target: str
+        :rtype: str
+        """
+        for c in letters:
+            if c > target:
+                return c
+        return letters[0] 
