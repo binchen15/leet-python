@@ -83,4 +83,24 @@ class Solution(object):
         l[0].next = None
         return l[-1]
         
-    
+class Solution(object):
+    """88% solution."""
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head == None or \
+           head.next == None:
+            return head
+       
+        prev = None
+        curr = head
+        while curr.next != None:
+            new = curr.next  # save next first
+            curr.next = prev
+            prev = curr
+            curr = new
+        curr.next = prev # for the last node. critical line
+        return curr
+            
