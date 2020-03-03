@@ -26,10 +26,10 @@ class Solution(object):
         buy    = prices[0]
         profit = 0
         for i in range(1, m):
-            if prices[i] < buy:
+            if prices[i] < buy: # reget buying price
                 buy = prices[i]
                 # do not update profit, not sell today
-            elif prices[i] - buy > profit:
+            elif prices[i] - buy > profit: # reconsider sell
                 profit =prices[i] - buy 
         return profit
 
