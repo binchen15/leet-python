@@ -10,7 +10,8 @@ class Solution(object):
         if nums[0] < nums[-1]:  # un-rotated case
             return nums[0]
 
-        # goal: reduce the distance from l to  to 1.
+        # goal: reduce the distance from l to h to 1.
+				# maintain nums[l] > nums[h], return nums[h]
         l, h = 0, L-1
         while l < h:
             if l + 1 == h:
