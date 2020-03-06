@@ -14,7 +14,8 @@ class Solution(object):
         if not r0*c0 or r0*c0 != r*c:
             return nums
         
-				#### this array initialization make shallow copy.. mess up
+        #### this array initialization make shallow copy.. 
+        #### subtle error. wasted 2 hours on it.
         row = [0] * c
         ans = [row] * r
         
