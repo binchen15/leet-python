@@ -14,3 +14,12 @@ class Solution(object):
         return ans
         
 
+class Solution(object):
+    """still not fast, but one liner"""
+    def findComplement(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        ones = int("1" * (len(bin(num)) - 2), 2)
+        return ones ^ num
