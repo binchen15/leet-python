@@ -33,3 +33,31 @@ class Solution(object):
             else:
                 l = mid + 1
         return False
+
+class Solution(object):
+    """95% solution"""
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        nr = len(matrix)
+        if nr == 0:
+            return False
+        nc = len(matrix[0])
+        if nc == 0:
+            return False
+        row = 0         # start from top right corner
+        col = nc - 1
+        
+        while row < nr and col >= 0:
+            val = matrix[row][col] 
+            if val == target:
+                return True
+            elif target < val:
+                col -= 1
+            else:
+                row += 1
+        return False
+        
