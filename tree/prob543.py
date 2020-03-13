@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+# diameter counts edges, not nodes
+# height count nodes.
+# two ends of the diameter might not both be leaves. 
+
 class Solution(object):
     def diameterOfBinaryTree(self, root):
         """
