@@ -44,4 +44,24 @@ class Solution(object):
         self.greatAgain(root.left, sums)
         self.greatAgain(root.right, sums)
         
+
+# 75% solution. recursion. traverse right subtree first
+class Solution(object):
+    
+    total = 0
+    def convertBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        self.traverse(root)
+        return root
         
+    def traverse(self, root):
+        if not root:
+            return
+        self.traverse(root.right)
+        root.val  += self.total
+        self.total = root.val
+        self.traverse(root.left)
+                
