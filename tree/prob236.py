@@ -109,3 +109,28 @@ class Solution(object):
         return  self.contains(root.left, node) or \
                 self.contains(root.right, node)
 
+#c. refer to some smart guy's  solution
+
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if not root:
+            return None
+        if root == p or root == q:
+            return root
+         
+        left  = self.lowestCommonAncestor(root.left,  p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left and right:  # one on each side 
+            return root
+        elif left:
+            return left
+        else:
+            return right
+            
+
