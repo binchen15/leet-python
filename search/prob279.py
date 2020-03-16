@@ -19,3 +19,32 @@ class Solution(object):
                 else:
                     break
         return dp[n]
+
+# tree. search by level-order traversal  
+class Solution(object):
+    def numSquares(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        import math
+        # perfect square numbers allowed
+        nums = [ i * i for i in range(1, int(math.sqrt(n)) + 1 )]
+        currL = [n]
+        nextL = []
+        cnt   = 0   # number of levels travelled so far
+        while currL:
+            cnt += 1
+            while currL:
+                i = currL.pop(0)
+                for j in nums:
+                    if j < i:
+                        nextL.append(i-j)
+                    elif j == i:  # found a solution
+                        return cnt
+                    else:  # j > i, quit inner loop
+                        break
+            currL = nextL
+            nextL = []
+
+
