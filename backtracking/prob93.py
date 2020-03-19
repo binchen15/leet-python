@@ -129,3 +129,40 @@ class Solution(object):
                 else:
                     ans.append(key)
         return ans
+
+
+# backtrack without building the tree... use a stack.
+class Solution(object):
+    def restoreIpAddresses(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        results = []
+        parts   = [] # the pieces, the stack for backtrack
+        
+        self.backtrack(s, parts, results)
+        return results
+        
+    def validate(self, s):
+        if len(s) > 3 or len(s) == 0:
+            return False
+        if s[0] == '0' and len(s) > 1:
+            return False
+        return int(s) <= 255
+                  
+    def backtrack(self, s, parts, results):
+        if not s or len(parts) == 4:
+            if not s and len(parts) == 4:
+                results.append(".".join(parts))
+            return
+        # s non-empty, parts less than 4 pieces
+        for i in range(1, min(4, len(s)+1)):
+            part = s[:i]
+            if self.validate(part):
+                parts.append(part)
+                self.backtrack(s[i:], parts, results)
+                parts.pop()
+                
+        
+
