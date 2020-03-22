@@ -12,15 +12,15 @@ class Solution(object):
         imax = nr
         jmax = nc
         i = 0
-        j = 0
         while i < imax:
+            j = 0
             while j < jmax:
                 if grid[i][j] < 0:
                     cnt += (imax - i) * (jmax - j)
                     jmax = j
+                    break
                 j += 1
             i += 1
-            j = 0
         return cnt
                     
-             
+                
