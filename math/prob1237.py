@@ -50,4 +50,26 @@ class Solution(object):
             else:
                 l = mid + 1
         return -1  # not found
+
+# smart solution. 80% speed
+class Solution(object):
+    def findSolution(self, customfunction, z):
+        """
+        :type num: int
+        :type z: int
+        :rtype: List[List[int]]
+        """
+        ans  = []
+        x, y = 1, 1000
+        while x <= 1000 and y >= 1:
+            v = customfunction.f(x, y)
+            if v == z:
+                ans.append([x, y])
+                x += 1
+                y -= 1
+            elif v > z:
+                y -= 1
+            else:
+                x += 1
+        return ans
             
