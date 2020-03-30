@@ -24,4 +24,21 @@ class Solution(object):
         tot += pc
         return tot
 
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        m = len(prices)
+        if m <= 1:
+            return 0
+        
+        p = 0
+        for i in range(1, m):
+            if prices[i] > prices[i-1]:
+                p += prices[i] - prices[i-1]
+            
+        return p
+        
 
