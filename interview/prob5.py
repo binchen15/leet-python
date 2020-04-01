@@ -25,7 +25,8 @@ class Solution(object):
             return s[loc-half+1:loc+half+1]
             
     def palindrome(self, m, s, i):
-        """length of palindrome centered at i"""
+		"""length of palindrome centered at i if odd,
+           or (i,i+1) if even"""
         odd = 1
         j   = 1
         while 0 <= i-j and \
