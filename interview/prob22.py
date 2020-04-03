@@ -1,5 +1,6 @@
 # 22 Generate Parentheses
 
+# 8% solution
 class Solution(object):
     def generateParenthesis(self, n):
         """
@@ -37,4 +38,36 @@ class Solution(object):
                     cnt -= 1
         return cnt == 0
         
-
+# 60% solution
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        if n == 0:
+            return [""]
+        ans  = []
+        cnts = [n,n] # number of "(" and ")"
+        self.walk(cnts, "", ans)
+        return ans
+    
+    def walk(self, cnts, s, ans):
+        if cnts[0] == 0 and cnts[1] == 0:
+            ans.append(s)
+            return
+        if cnts[1] < cnts[0]: # more ) used than (    
+            return  # wrong case
+        if cnts[1] == cnts[0]:
+            cnts[0] -= 1
+            self.walk(cnts, s+"(", ans)
+            cnts[0] += 1
+        else:
+            if cnts[0] > 0:
+                cnts[0] -= 1
+                self.walk(cnts, s+"(", ans)
+                cnts[0] += 1
+            cnts[1] -= 1
+            self.walk(cnts, s+")", ans)
+            cnts[1] += 1
+ 
