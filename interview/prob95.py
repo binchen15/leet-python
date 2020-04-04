@@ -93,4 +93,36 @@ class Solution(object):
             self.sameTree(head1.left,  head2.left) and \
             self.sameTree(head1.right, head2.right)
     
+# 70% solution
+class Solution(object):
+    def generateTrees(self, n):
+        """
+        :type n: int
+        :rtype: List[TreeNode]
+        """     
+        if n == 0:
+            return []
+        nums = [i+1 for i in range(n)]
+        return self.generator(nums)
         
+    def generator(self, nums):
+        """assume nums is a sorted array"""
+        m = len(nums)
+        if m == 0:
+            return [None]
+        if m == 1:
+            root = TreeNode(nums[0])
+            return [root]
+        ans = []
+        for i in range(m):
+            v = nums[i]
+            sub_l = self.generator(nums[:i])
+            sub_r = self.generator(nums[i+1:])
+            for l in sub_l:
+                for r in sub_r:
+                    root = TreeNode(v)
+                    root.left  = l
+                    root.right = r
+                    ans.append(root)
+        return ans
+                    
