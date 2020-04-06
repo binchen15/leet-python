@@ -50,4 +50,36 @@ class Solution(object):
                 l = mid + 1
         return -1
         
-   
+# 97% solution
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        m = len(nums)
+        if not m:
+            return -1
+        return self.searchBinary(nums, 0, m-1, target)
+        
+        
+    def searchBinary(self, nums, l, h, target):
+        """search nums[l:h+1] for target"""
+        if l > h:
+            return -1
+        mid = l + (h-l)//2
+        if nums[mid] == target:
+            return mid
+        if nums[l] <= nums[mid]: # left side sorted
+            if nums[l] <= target <= nums[mid]:
+                return self.searchBinary(nums, l, mid, target)
+            else:
+                return self.searchBinary(nums, mid+1, h, target)
+        else:   # right side is sorted
+            if nums[mid] <= target <= nums[h]:
+                return self.searchBinary(nums, mid, h, target)
+            else:
+                return self.searchBinary(nums, l, mid-1, target)
+        
+                  
