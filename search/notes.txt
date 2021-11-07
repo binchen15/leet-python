@@ -1,0 +1,4 @@
+BFS
+	shortest path
+DFS
+	reachability problem
