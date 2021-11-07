@@ -19,8 +19,10 @@ class Solution(object):
         if not node:
             return None
 
-        cnodes = {}
-        set1 = set()
+        cnodes = {}  # cloned nodes key by val of the node
+
+        set1 = set()  # to store vals/nodes already traversed for dfs
+        set2 = set()  # to store vals/nodes already traversed for dfs2
 
         def dfs(node):
             key = node.val
@@ -33,13 +35,12 @@ class Solution(object):
                     if nbr.val not in set1:
                         dfs(nbr)
 
-        set2 = set()
         def dfs2(node):
             key = node.val
             set2.add(key)
             cnode = cnodes[key]
             if node.neighbors:
-                cnode.neighbors = [ cnodes[nbr.val] for nbr in node.neighbors]
+                cnode.neighbors = [cnodes[nbr.val] for nbr in node.neighbors]
                 for nbr in node.neighbors:
                     if nbr.val not in set2:
                         dfs2(nbr)
