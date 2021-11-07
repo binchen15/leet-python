@@ -48,3 +48,34 @@ class Solution(object):
         dfs(node)
         dfs2(node)
         return cnodes[node.val]
+
+# new solution with 1 pass
+class Solution(object):
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+        """
+
+        if not node:
+            return None
+
+        visited = {}
+
+        # visited[node] = Node(node.val)
+
+        def dfs(node):
+            if node in visited:
+                return visited[node]
+
+            visited[node] = Node(node.val)
+            for neighbor in node.neighbors:
+                if neighbor not in visited:
+                    visited[node].neighbors.append(dfs(neighbor))
+                else:
+                    visited[node].neighbors.append(visited[neighbor])
+
+            return visited[node]
+
+        return dfs(node)
+
