@@ -23,3 +23,17 @@ class Solution:
             return False
 
         return helper(s, 0, words, memo, n)
+
+# DP solution
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+
+        n = len(s)
+        dp = [False] * (n+1)  # dp[i] store result for s[:i]
+        dp[0] = True
+        for i in range(n+1):
+            if dp[i]:
+                for word in wordDict:
+                    if i + len(word) <= n and s[i:i+len(word)] == word:
+                        dp[i+len(word)] = True
+        return dp[-1]
