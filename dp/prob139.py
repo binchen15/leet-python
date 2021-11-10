@@ -37,3 +37,25 @@ class Solution:
                     if i + len(word) <= n and s[i:i+len(word)] == word:
                         dp[i+len(word)] = True
         return dp[-1]
+
+# BFS + visited set
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+
+        n = len(s)
+        q = [0]
+        visited = set()
+
+        while q:
+            cur = q.pop(0)
+            if cur in visited:
+                continue
+            visited.add(cur)
+            if cur == n:
+                return True
+            for word in wordDict:
+                t = cur + len(word)
+                if t <= n and s[cur:t] == word:
+                    q.append(t)
+
+        return False
