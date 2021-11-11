@@ -23,4 +23,15 @@ class Solution(object):
 
         return ans
 
+# closure number solution
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if n == 0:
+            return [""]
 
+        ans = []
+        for c in range(n):
+            for s1 in self.generateParenthesis(c):
+                for s2 in self.generateParenthesis(n-c-1):
+                    ans.append( f"({s1}){s2}")
+        return ans
