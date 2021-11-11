@@ -77,3 +77,24 @@ class Solution:
             cur2 = cur2.next
 
         return head2
+
+# copy graph solution recursion
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+
+        visited = {}
+
+        def copy_graph(head):
+            if not head:
+                return None
+            if head in visited:
+                return visited[head]
+
+            new_head = Node(head.val)
+            visited[head] = new_head
+            new_head.next = copy_graph(head.next)
+            new_head.random = copy_graph(head.random)
+            return new_head
+
+        return copy_graph(head)
+
