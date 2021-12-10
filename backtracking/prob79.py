@@ -49,4 +49,46 @@ class Solution(object):
             return False
                 
 
-
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        
+        m = len(board)
+        n = len(board[0])
+        l = len(word)
+        
+        if l > m*n:
+            return False
+        
+        track = [ [0] * n for _ in range(m) ]  # 0, 1 means unwalked, walked
+        
+        def walk(i, row, col):
+            """word[i] to be walked at (row, col), track[row][col] set to 1 already"""
+            
+            if board[row][col] != word[i]:
+                return False
+            
+            if i == l-1:
+                return True
+            
+            nbrs = [ [row+1, col], [row-1, col], [row, col+1], [row, col-1] ]
+            nbrs = [(r,c) for r, c in nbrs if 0 <= r < m and 0 <= c < n and track[r][c] == 0]
+            if not nbrs:
+                return False
+            
+            for (r, c) in nbrs:
+                track[r][c] = 1
+                if walk(i+1, r, c):
+                    return True
+                track[r][c] = 0
+            
+            return False
+        
+        for r in range(m):
+            for c in range(n):
+                track[r][c] = 1
+                if walk(0, r, c):
+                    return True
+                track[r][c] = 0
+                
+        return False
+    
