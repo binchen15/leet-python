@@ -27,4 +27,28 @@ class Solution(object):
                 parts.pop()
         return
                 
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         
+        n = len(candidates)
+        candidates.sort()
+        
+        ans = set()
+        
+        def walk(comb, val):
+            if val == 0:
+                ans.add(tuple(sorted(comb)))
+            if val < 0:
+                return
+            
+            for candidate in candidates:
+                if candidate > val:
+                    break
+                if comb and candidate < comb[-1]:
+                    continue
+                walk(comb + [candidate], val-candidate)
+                
+        walk([], target)
+                    
+        return list(ans)
+
