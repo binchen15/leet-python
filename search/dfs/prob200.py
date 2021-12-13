@@ -33,3 +33,65 @@ class Solution(object):
         for u, v in ans:
             self.expand(grid, nr, nc, u, v)
 
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        def walk(x, y):
+            """walk the island from (i,j) assuming grid[i][j]=1"""
+            
+            cur = [(x, y)]
+            nxt = []
+            while True:
+                while cur:
+                    i, j = cur.pop(0)
+                    grid[i][j] = 0
+                    nbrs = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+                    nbrs = [(i, j) for i, j in nbrs if 0 <= i < m and 0 <= j < n and grid[i][j] == "1"]
+                    for a, b in nbrs:
+                        grid[a][b] = 0
+                        nxt.append((a,b))
+                if nxt:
+                    cur = nxt
+                    nxt = []
+                else:
+                    break
+                    
+        
+        ans = 0
+        
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1":
+                    ans += 1
+                    walk(i, j)
+                    
+        return ans
+        
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+
+        m = len(grid)
+        n = len(grid[0])
+
+        def walk(i, j):
+            """walk the island from (i,j) assuming grid[i][j]=1"""
+            grid[i][j] = "0"
+            nbrs = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+            nbrs = [(i, j) for i, j in nbrs if 0 <= i < m and 0 <= j < n and grid[i][j] == "1"]
+            for x, y in nbrs:
+                walk(x, y)
+
+        ans = 0
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1":
+                    ans += 1
+                    walk(i, j)
+
+        return ans
+
