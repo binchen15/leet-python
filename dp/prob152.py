@@ -24,13 +24,3 @@ class Solution(object):
             dp_min[i] = min(choices)
             
         return max(dp_max)
-        
-        
-                    else:
-                        if v > 0:
-                            dp[i] = (v*dp[i-1][0], 1 + dp[i-1][1])
-                        else:
-                            if i-1-
-                    
-            
-        
