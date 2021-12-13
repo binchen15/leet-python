@@ -95,4 +95,28 @@ class Solution(object):
                 del min_stack[-1]
             min_stack.append(i)  
         return ans
-                
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+
+        n = len(temperatures)
+        ans = [0] * n
+
+        if n == 1:
+            return [0]
+
+        stk = [(0, temperatures[0])]
+
+        for i in range(1, n):
+            temp = temperatures[i]
+            if temp <= stk[-1][1]:
+                stk.append((i, temp))
+            else:
+                while stk and stk[-1][1] < temp:
+                    j, t = stk.pop()
+                    ans[j] = i-j
+                stk.append((i, temp))
+
+
+        return ans
+
