@@ -7,20 +7,16 @@ class Solution:
         def walk():
             
             minutes = 0
-            cnts = []
+            cnts = []  # number of new rotton in each minute
             while True:
                 to_rot = set()
                 for i in range(m):
                     for j in range(n):
-                        if grid[i][j] == 0:
-                            continue
-                        elif grid[i][j] == 1:
-                            continue
-
                         if grid[i][j] == 2:
                             nbrs = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
                             nbrs = [(i, j) for (i, j) in nbrs if 0 <= i < m and 0 <= j < n and grid[i][j] == 1]
-                            to_rot.update(nbrs)
+                            if nbrs:
+                                to_rot.update(nbrs)
                             
                 if len(to_rot) == 0:
                     break
@@ -28,7 +24,7 @@ class Solution:
                     minutes += 1
                     cnts.append(len(to_rot))
                     for x, y in to_rot:
-                        grid[x][y] = 2
+                        grid[x][y] = 2  # can not do it in the nested for loops above
             
             return [minutes, cnts]
         
@@ -44,4 +40,3 @@ class Solution:
             return -1
         else:
             return minutes
-
