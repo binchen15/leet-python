@@ -65,4 +65,36 @@ class Solution(object):
                         dp[j] = min(dp[j], dp[j-val] + 1)
                 
         return dp[amount] 
-        
+
+# BFS shortest path method
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+
+        n = len(coins)
+        if amount == 0:
+            return 0
+        coins.sort()
+
+        cur = [amount]
+        nxt = set()
+        cnt = 1
+        visited = set()
+        while True:
+            while cur:
+                val = cur.pop(0)
+                visited.add(val)
+                for coin in coins:
+                    if coin == val:
+                        return cnt
+                    elif coin > val:
+                        break
+                    else:
+                        if val-coin not in visited:
+                            nxt.add(val-coin)
+            if not nxt:
+                return -1
+            else:
+                cur = list(nxt)
+                nxt = set()
+                cnt += 1
+
