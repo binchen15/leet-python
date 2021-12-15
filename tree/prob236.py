@@ -133,4 +133,39 @@ class Solution(object):
         else:
             return right
             
+# Dec 15 2021 
+class Solution:
+    
+    memo = {}
+    
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+              
+        if root.val == p.val or root.val == q.val:
+            return root
+        
+        if self.isChild(root.left, p) and self.isChild(root.left, q):
+            ans = self.lowestCommonAncestor(root.left, p, q)
+        elif self.isChild(root.right, p) and self.isChild(root.right, q):
+            ans = self.lowestCommonAncestor(root.right, p, q)
+        else:
+            ans = root
+            
+        return ans
+
+            
+    def isChild(self, root, node):
+            """return is node a child of root"""
+            if not root:
+                return False
+            if node == root:
+                return True
+            
+            if (root, node) in self.memo:
+                return self.memo[(root, node)]
+            
+            ans = self.isChild(root.left, node) or self.isChild(root.right, node)
+            self.memo[(root, node)] = ans
+            
+            return ans
+            
 
