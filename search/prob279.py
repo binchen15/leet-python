@@ -81,3 +81,35 @@ class Solution(object):
             currL = nextL
             nextL = []
 
+# BFS with visited set
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        if n == 1:
+            return 1
+
+        nums = [i*i for i in range(1, int(math.sqrt(n))+1)]
+
+        cur = [n]
+        nxt = set()
+        cnt = 1
+        visited = set()
+
+        while True:
+            while cur:
+                val = cur.pop(0)
+                visited.add(val)
+                for sq in nums:
+                    if sq == val:
+                        return cnt
+                    elif sq < val:
+                        remain = val - sq
+                        if remain not in visited:
+                            nxt.add(remain)
+                    else:
+                        break
+
+            cur = list(nxt)
+            nxt = set()
+            cnt += 1
+
