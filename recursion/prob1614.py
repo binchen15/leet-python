@@ -35,3 +35,18 @@ class Solution:
                     tmp = []
             i += 1
         return ans
+
+# second solution
+class Solution:
+    def maxDepth(self, s: str) -> int:
+
+        ans = 0
+        cnt = 0
+        for c in s:
+            if c == "(":
+                cnt += 1
+                ans = max(cnt, ans)
+            elif c == ")":
+                cnt -= 1
+
+        return ans
