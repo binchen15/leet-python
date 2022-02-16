@@ -149,3 +149,21 @@ class Solution(object):
                 h -= 1
         ans.append(l)
         return ans        
+
+class Solution:
+    def diStringMatch(self, s: str) -> List[int]:
+        
+        n = len(s)
+        nums = [i for i in range(0, n+1)]
+        
+        ans = []
+        for c in s:
+            if c == "D":
+                ans.append(nums.pop())
+            else:
+                ans.append(nums.pop(0))
+                
+        ans.append(nums[0])
+        
+        return ans
+                
