@@ -17,3 +17,12 @@ class Solution:
                 ans = cost
                 
         return ans
+
+class Solution:
+    def minCostToMoveChips(self, position: List[int]) -> int:
+        
+        cnts = [0, 0]
+        for v in position:
+            cnts[v%2] += 1
+            
+        return min(cnts)
