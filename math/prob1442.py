@@ -40,3 +40,19 @@ class Solution:
                         ans += 1
 
         return ans
+
+# 27% solution
+class Solution:
+    def countTriplets(self, arr: List[int]) -> int:
+
+        n = len(arr)
+        ans = 0
+
+        for i in range(n-1):
+            tmp = arr[i]
+            for k in range(i+1, n):
+                tmp ^= arr[k]
+                if tmp == 0:
+                    ans += k - i
+
+        return ans
