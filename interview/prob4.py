@@ -37,3 +37,47 @@ class Solution(object):
             return c2
         else:
             return 0.5*(c1+c2)
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        
+        m = len(nums1)
+        n = len(nums2)
+        
+        if m == 0:
+            return self.helper(nums2)
+        if n == 0:
+            return self.helper(nums1)
+        
+        nums = self.merge(nums1, nums2)
+        
+        return self.helper(nums)
+        
+    def helper(self, nums):
+        n = len(nums)
+        if n % 2 == 0:
+            return 0.5*( nums[n//2] + nums[n//2-1])
+        else:
+            return nums[n // 2]
+        
+    def merge(self, nums1, nums2):
+        
+        m = len(nums1)
+        n = len(nums2)
+        nums = []
+        p1, p2 = 0, 0
+        
+        while p1 < m and p2 < n:
+            if nums1[p1] <= nums2[p2]:
+                nums.append(nums1[p1])
+                p1 += 1
+            else:
+                nums.append(nums2[p2])
+                p2 += 1
+                
+        if p1 != m:
+            nums.extend(nums1[p1:m])
+        if p2 != n:
+            nums.extend(nums2[p2:n])
+                
+        return nums
