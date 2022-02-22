@@ -27,3 +27,28 @@ class Solution(object):
             i   += 1
         return curr
 
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        if not head or not head.next:
+            return head
+
+        def findLength(node):
+            cur = node
+            n = 0
+            while cur:
+                n += 1
+                cur = cur.next
+            return n
+
+        n = findLength(head)
+        mid = n // 2
+
+        cur = head
+        i = 0
+        while i < mid:
+            cur = cur.next
+            i += 1
+
+        return cur
+
