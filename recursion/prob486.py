@@ -38,3 +38,22 @@ class Solution:
 
         return helper(0, len(nums)-1) >= 0
 
+# dp solution
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+
+        n = len(nums)
+
+        dp = [ [0] * n for _ in range(n) ]
+        # dp[i][j] stores the margin of current player for subarray nums[i:j+1]
+        for i in range(n):
+            dp[i][i] = nums[i]
+
+        for d in range(1, n):
+            for i in range(n-d):
+                j = i + d
+                margin = max(nums[i] - dp[i+1][j], nums[j] - dp[i][j-1])
+                dp[i][j] = margin
+
+        return dp[0][n-1] >= 0
+
