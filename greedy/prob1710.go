@@ -34,3 +34,29 @@ func maximumUnits(boxTypes [][]int, truckSize int) int {
     
     
 }
+
+# Jun17 2022
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+
+        bt = boxTypes
+
+        # sort boxes by values/units reversely
+        bt.sort(key=lambda x : x[1], reverse=True)
+
+        i = 0
+        boxes = 0
+        units = 0
+
+        while boxes < truckSize and i < len(bt):
+            if bt[i][0] + boxes <= truckSize:
+                boxes += bt[i][0]
+                units += bt[i][0]*bt[i][1]
+                i += 1
+            else:
+                units += (truckSize - boxes) * bt[i][1]
+                boxes = truckSize
+                break
+
+        return units
+
