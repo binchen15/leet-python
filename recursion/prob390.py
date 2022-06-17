@@ -1,4 +1,4 @@
-# time limit
+# time limit error for last few cases
 class Solution:
     def lastRemaining(self, n: int) -> int:
 
@@ -24,3 +24,25 @@ class Solution:
 
         return cur[0]
 
+# 30% solution
+class Solution:
+    def lastRemaining(self, n: int) -> int:
+
+        left, right = 1, n
+        forward = True
+        step = 2
+
+        while left < right:
+            d = step // 2
+            if (right - left) % step == 0:
+                left += d
+                right -= d
+            elif forward:
+                left += d
+            else:
+                right -=d
+
+            step *= 2
+            forward = not forward
+
+        return left
