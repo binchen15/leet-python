@@ -25,3 +25,27 @@ class Solution(object):
                 j += 1
         return True
 
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+
+        m = len(s)
+        n = len(t)
+
+        if m > n:
+            return False
+
+        i, j = 0, 0
+
+        while i < m: # match s[i]
+            while t[j] != s[i] and j+1 < n:
+                j += 1
+
+            if t[j] == s[i]:
+                i += 1
+                j += 1
+                if i < m and j == n:
+                    return False
+            else:
+                return False
+
+        return True
