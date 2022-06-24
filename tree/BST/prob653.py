@@ -197,4 +197,27 @@ class Solution(object):
         else:
             return self.findValue(root.right, val)
         
- 
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        
+        vals = set()
+        
+        def walk(root):
+            if not root:
+                return
+            vals.add(root.val)
+            if root.left:
+                walk(root.left)
+            if root.right:
+                walk(root.right)
+            
+        walk(root) 
+
+        for v in vals:
+            dual = k - v
+            if dual == v:
+                continue
+            if dual in vals:
+                return True
+            
+        return False
