@@ -25,4 +25,21 @@ class Solution(object):
         else:
             return self.rangeSumBST(root.left, L, R)
 
+class Solution:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        
+        if not root:
+            return 0
+        
+        val = root.val
+        if val > high:
+            return self.rangeSumBST(root.left, low, high)
+        elif val == high:
+            return val + self.rangeSumBST(root.left, low, high)
+        elif val == low:
+            return val + self.rangeSumBST(root.right, low, high)
+        elif val < low:
+            return self.rangeSumBST(root.right, low, high)
+        else:
+            return val + self.rangeSumBST(root.left, low, high) + self.rangeSumBST(root.right, low, high)
 
