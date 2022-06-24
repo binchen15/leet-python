@@ -31,3 +31,23 @@ class Solution(object):
             self.height(root.left),
             self.height(root.right)
         )
+
+# better solution
+class Solution:
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+
+        h = self.heightBalanced(root)
+        return h != -1
+
+    def heightBalanced(self, node):
+        """return -1 if not balanced, and return height if balanced"""
+        if not node:
+            return 0
+
+        l, r = self.heightBalanced(node.left), self.heightBalanced(node.right)
+        if l == -1 or r == -1:
+            return -1
+        if abs(l-r) > 1:
+            return -1
+        return 1 + max(l, r)

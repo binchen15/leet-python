@@ -37,4 +37,35 @@ class Solution(object):
         else:
             return False
 
+# Jun 24 2022
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
 
+        def walk(ps, node):
+
+            if not node:
+                return False
+
+            if self.isLeaf(node):
+                if ps + node.val == targetSum:
+                    return True
+                else:
+                    return False
+
+            if node.left:
+                if walk(ps+node.val, node.left):
+                    return True
+
+            if node.right:
+                if walk(ps+node.val, node.right):
+                    return True
+
+            return False
+
+        return walk(0, root)
+
+
+    def isLeaf(self, node):
+        if not node:
+            return False
+        return not node.left and not node.right

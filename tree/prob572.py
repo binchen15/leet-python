@@ -30,4 +30,29 @@ class Solution(object):
                self.sameTree(s.right, t.right)
 
 
-
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        
+        if self.isCopy(root, subRoot):
+            return True
+        
+        if root.left and self.isSubtree(root.left, subRoot):
+            return True
+        
+        if root.right and self.isSubtree(root.right, subRoot):
+            return True
+        
+        return False
+        
+    def isCopy(self, root1, root2):
+        
+        if not root1 and not root2:
+            return True
+        
+        if not root1 or not root2:
+            return False
+        
+        if root1.val != root2.val:
+            return False
+        
+        return self.isCopy(root1.left, root2.left) and self.isCopy(root1.right, root2.right)
