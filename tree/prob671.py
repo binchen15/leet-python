@@ -37,3 +37,49 @@ class Solution(object):
             else:
                 return min(l, r)
 
+# 
+class Solution:
+    def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
+
+        vals = set()
+
+        if not root:
+            return -1
+
+        cur = [root]
+        while cur:
+            node = cur.pop(0)
+            if node.val not in vals:
+                    vals.add(node.val)
+            if node.left:
+                cur.extend([node.left, node.right])
+
+        if len(vals) == 1:
+            return -1
+
+        return sorted(vals)[1]
+
+class Solution:
+    def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
+        
+        if not root:
+            return -1
+        
+        min1 = root.val
+        min2 = sys.maxsize
+        
+        cur = [root]
+        while cur:
+            node = cur.pop(0)
+            v = node.val
+            if min1 < v < min2:
+                min2 = v
+                # no need to track children of min2
+            elif min1 == v and node.left:
+                cur.extend([node.left, node.right])
+            
+                
+        if min2 == sys.maxsize:
+            return -1
+        return min2
+        
