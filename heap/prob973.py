@@ -35,4 +35,27 @@ class Solution(object):
         for d in hp: # negated d
             ans.append(ds[d].pop())
         return ans
-        
+
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+
+        class Point:
+            def __init__(self, point):
+                self.point = point
+                self.dist = point[0] * point[0] + point[1] * point[1]
+
+            def __lt__(self, other):
+                return self.dist > other.dist
+
+        pq = []
+
+        for point in points:
+            p = Point(point)
+            if len(pq) < k:
+                heapq.heappush(pq, p)
+            else:
+                if p > pq[0]:
+                    heapq.heappop(pq)
+                    heapq.heappush(pq, p)
+
+        return  [P.point for P in pq]
