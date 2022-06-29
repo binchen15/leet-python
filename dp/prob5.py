@@ -32,3 +32,31 @@ class Solution(object):
         start, end = record[1]
         return s[start:end+1]
 
+# Jun 28 2022
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+
+        n = len(s)
+        if n <= 1:
+            return s
+
+        ans = s[0]
+        size = 1
+
+        memo = [[0] * n for _ in range(n)]
+        for i in range(n):
+            memo[i][i] = 1
+
+        for delta in range(1, n):
+            for i in range(n - delta):
+                j = i + delta
+                if s[i] != s[j]:
+                    continue
+                if i+1 == j or memo[i+1][j-1] == 1:
+                    memo[i][j] = 1
+                    if j-i+1 > size:
+                        size = j-i+1
+                        ans = s[i:j+1]
+
+        return ans
+
