@@ -105,4 +105,13 @@ class Solution(object):
         return words
     
                 
-
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        
+        cnts = {}
+        for word in words:
+            cnts[word] = cnts.get(word, 0) + 1
+            
+        tmp = sorted(cnts.items(), key = lambda x: (-x[1], x[0]))[:k]
+        ans = [item[0] for item in tmp]
+        return ans

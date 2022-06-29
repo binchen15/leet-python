@@ -18,3 +18,38 @@ class Solution:
 
 
         return max(profits)
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        
+        n = len(prices)
+        if n <= 1:
+            return 0
+        
+        low = [0] * n
+        low[0] = prices[0]
+        
+        ans = 0
+        
+        for i in range(1, n):
+            ans = max(ans, prices[i] - low[i-1])
+            low[i] = min(prices[i], low[i-1])
+            
+        return ans
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        
+        n = len(prices)
+        if n <= 1:
+            return 0
+        
+        low = prices[0]
+        
+        ans = 0
+        
+        for i in range(1, n):
+            ans = max(ans, prices[i] - low)
+            low = min(prices[i], low)
+            
+        return ans
