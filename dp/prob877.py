@@ -43,4 +43,25 @@ class Solution:
         
         return dp[0][n-1] > 0
 
+# 40% solution
+class Solution:
+    def stoneGame(self, piles: List[int]) -> bool:
+        
+        n = len(piles)
+        if n == 2:
+            return True
+        
+        dp = [ [0] * n for _ in range(n) ]
+        for i in range(0, n-1):
+            dp[i][i+1] = abs(piles[i] - piles[i+1])
+            
+        for delta in range(2, n):
+            for i in range(0, n-delta):
+                j = i + delta
+                c1 = abs(piles[i] - piles[j]) + dp[i+1][j-1]
+                c2 = piles[i] - piles[i+1] + dp[i+2][j]
+                c3 = piles[j] - piles[j-1] + dp[i][j-2]
 
+                dp[i][j] = max(c1,c2,c3)
+        
+        return dp[0][n-1] > 0
