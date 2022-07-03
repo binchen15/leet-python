@@ -19,3 +19,25 @@ class Solution:
             return ans
 
         return helper(0, n-1, 1)
+
+# removed j from the helper 
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+
+        n = len(piles)
+
+        @lru_cache(maxsize=None)
+        def helper(i, M):  # j = n-1
+            """deals with piles[i:] with initial M"""
+            m = n-i
+            if 2 * M >= m:
+                return sum(piles[i:])
+            ans = 0
+            for x in range(1, 2*M+1):
+                M2 = max(M, x)
+                tmp = sum(piles[i:]) - helper(i+x, M2)
+                ans = max(ans, tmp)
+
+            return ans
+
+        return helper(0, 1)

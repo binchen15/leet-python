@@ -64,3 +64,42 @@ if __name__ == "__main__":
 	s = Solution()
 	print(s.numberOfArithmeticSlices([1,2,3,8,9,10]))
 	
+
+class Solution:
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        if n <= 2:
+            return 0
+        
+        def helper(i):
+            """start from nums[i] find the maximum j such as nums[i:j+1] 
+            is arithemtic"""
+            if i == n-1:
+                return i
+            j = i+1
+            diff = nums[j] - nums[i]
+            while j+1 < n and nums[j+1] - nums[j] == diff:
+                j += 1
+                
+            return j
+        
+        def helper2(m):
+            """for arithemtic seq of length m, find the total sub arithmetic"""
+            return (m-1) * (m-2) //2
+        
+        ans = 0
+        i = 0
+        while i < n:
+            j = helper(i)
+            # print(j)
+            if j == i:
+                i += 1
+            elif j - i < 2:
+                i = j
+            else:
+                ans += helper2(j-i+1)
+                i = j   # not j+1
+                
+        return ans
+
