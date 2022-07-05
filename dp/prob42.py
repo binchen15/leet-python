@@ -26,4 +26,24 @@ class Solution(object):
                 ans += h - height[i]
         return ans
 
-
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        
+        n = len(height)
+        a1 = [0] * n
+        a2 = [0] * n
+        
+        for i in range(1, n):
+            a1[i] = max(height[i-1], a1[i-1])
+            
+        for i in range(n-2, -1, -1):
+            a2[i] = max(height[i+1], a2[i+1])
+             
+        ans = 0
+        
+        for i in range(n):
+            bar = min(a1[i], a2[i])
+            water = max(0, bar - height[i])
+            ans += water
+            
+        return ans
