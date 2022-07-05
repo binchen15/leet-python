@@ -27,7 +27,8 @@ class Solution:
                     else:
                         return self.isMatch(s[1:], p[1:])
                 else:
-                    return self.isMatch(s[1:], "")
+                    return m == 1
+                    # return self.isMatch(s[1:], "")
 
             elif p[0] in string.ascii_lowercase and p[1] == "*":
                 return self.isMatch(s, p[2:])
