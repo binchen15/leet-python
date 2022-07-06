@@ -37,4 +37,32 @@ class Solution(object):
                         
         return dp[m][n]       
                 
-                
+
+# recursion + memo
+class Solution:
+
+    @lru_cache(maxsize=None)
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+
+        n1 = len(s1)
+        n2 = len(s2)
+        n3 = len(s3)
+
+        if n1 + n2 != n3:
+            return False
+
+        if n1 == 0 or n2 == 0:
+            return s1 + s2 == s3
+
+        if s1[-1] != s3[-1] and s2[-1] != s3[-1]:
+            return False
+
+        if s1[-1] == s3[-1]:
+            if self.isInterleave(s1[:n1-1], s2, s3[:n3-1]):
+                return True
+
+        if s2[-1] == s3[-1]:
+            if self.isInterleave(s1, s2[:n2-1], s3[:n3-1]):
+                return True
+
+        return False
