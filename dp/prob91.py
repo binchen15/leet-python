@@ -36,3 +36,53 @@ class Solution(object):
         return dp[m-1]            
                 
 
+# recursion with memoization
+class Solution:
+
+    @lru_cache(maxsize=None)
+    def numDecodings(self, s: str) -> int:
+
+        if not s:
+            return 1
+
+        if s.startswith("0"):
+            return 0
+
+        n = len(s)
+        if n == 1:
+            return 1
+
+        numbers = set(str(i) for i in range(1, 27))
+        digits = set(str(i) for i in range(1, 10))
+
+        ans = 0
+        if s[n-1] in digits:
+            ans +=  self.numDecodings(s[:n-1])
+        if s[n-2:] in numbers:
+            ans += self.numDecodings(s[:n-2])
+
+        return ans
+
+# DP 
+class Solution:
+
+    def numDecodings(self, s: str) -> int:
+
+        n = len(s)
+        digits = set(str(i) for i in range(1, 10))
+        numbers = set(str(i) for i in range(1, 27))
+
+        dp = [0] * (n+1)
+        dp[0] = 1
+        if s[0] != "0":
+            dp[1] = 1
+
+        for i in range(2, n+1):
+            c1 = s[i-1]
+            c2 = s[i-2:i]
+            if c1 in digits:
+                dp[i] += dp[i-1]
+            if c2 in numbers:
+                dp[i] += dp[i-2]
+
+        return dp[n]
