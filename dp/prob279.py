@@ -48,3 +48,46 @@ class Solution(object):
 if __name__ == "__main__":
 	s = Solution()
 	print(s.numSquares(7691))
+
+#---- time error
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        if n == 1:
+            return 1
+
+        ub = int(math.sqrt(n))
+
+        dp = [ [0] * (n+1) for _ in range(ub) ]
+        for j in range(1, n+1):
+            dp[0][j] = j
+
+        for i in range(1, ub):
+            val = (i+1)*(i+1)
+            for j in range(1, n+1):
+                if j < val:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = min(dp[i-1][j], 1 + dp[i][j-val])
+
+        return dp[ub-1][n]
+
+# 2D to 1D DP . 30% solution
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        if n == 1:
+            return 1
+
+        ub = int(math.sqrt(n))
+
+        dp = [0] * (n+1)
+        for j in range(1, n+1):
+            dp[j] = j
+
+        for i in range(1, ub):
+            val = (i+1)*(i+1)
+            for j in range(val, n+1):
+                    dp[j] = min(dp[j], 1 + dp[j-val])
+
+        return dp[n]
