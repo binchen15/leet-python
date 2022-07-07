@@ -70,6 +70,7 @@ class Solution:
         
         return abs(self.low)+1
 
+# DP, bottom up, right to left.
 class Solution:
     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
         

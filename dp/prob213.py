@@ -31,4 +31,31 @@ class Solution(object):
             dp2[i] = max(dp2[i-2] + nums[i], dp2[i-1])
             
         return max(dp1[m-1], dp2[m-1])
-            
+
+# DP solution. 
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+
+        n = len(nums)
+        if n <= 3:
+            return max(nums)
+
+        def helper(i, j):
+            """nums[i, j+1]"""
+            if j-i < 2:
+                return max(nums[i:j+1])
+
+            dp = [0] * (j-i+1)
+            dp[0] = nums[i]
+            dp[1] = max(nums[i], nums[i+1])
+            for k in range(2, j-i+1):
+                dp[k] = max(dp[k-1], nums[i+k]+dp[k-2])
+
+            #print(dp)
+            return dp[j-i]
+
+        p1 = helper(1, n-1) # not robbing first house
+        p2 = nums[0] + helper(2, n-2)
+        #print(p1, p2)
+
+        return max(p1, p2)
