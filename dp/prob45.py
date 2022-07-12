@@ -74,4 +74,37 @@ class Solution(object):
                         visited.add(i+j)
             q = nq
             l += 1
-         
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+
+        n = len(nums)
+        if n == 1:
+            return 0
+
+        cur = [0]
+        jumps = 0
+        nxt = []
+        seen = set([0])
+        while True:
+            while cur:
+                i = cur.pop(0)
+                if i == n-1:
+                    return jumps
+                if nums[i] > 0:
+                    for d in range(1, nums[i]+1):
+                        if i + d < n:
+                            if (i+d) not in seen:
+                                nxt.append(i+d)
+                                seen.add(i+d)
+                        else:
+                            break
+            if not nxt:
+                return -1
+            else:
+                cur = nxt
+                nxt = []
+                jumps += 1
+
+        return -1
+
