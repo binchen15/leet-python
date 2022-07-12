@@ -108,3 +108,33 @@ class Solution:
 
         return -1
 
+
+#  greedy solution
+# each step, find the best next step. only jump there
+#User function Template for python3
+class Solution:
+	def minJumps(self, arr, n):
+	    #code here
+
+	    if n == 1:
+	        return 0
+
+	    cur = 0
+	    jumps = 0
+
+	    while cur < n-1:
+	        if arr[cur] > 0:
+	            span = arr[cur]
+	            if cur + span >= n-1:
+	                return jumps + 1
+	            nxt = cur+1 # try to find best next jump
+	            for j in range(cur+1, cur+span+1):
+	                if j + arr[j] > nxt + arr[nxt]:
+	                    nxt = j
+
+	            cur = nxt
+	            jumps += 1
+	        else:
+	            return -1
+
+        return  -1
