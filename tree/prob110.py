@@ -51,3 +51,34 @@ class Solution:
         if abs(l-r) > 1:
             return -1
         return 1 + max(l, r)
+
+from functools import lru_cache
+
+#Function to check whether a binary tree is balanced or not.
+class Solution:
+    
+    def isBalanced(self,root):
+    
+        #add code here
+        if not root:
+            return True
+        
+        def walk(node):
+            if not node:
+                return True
+            if node.left:
+                if not walk(node.left):
+                    return False
+            if node.right:
+                if not walk(node.right):
+                    return False
+            return abs(self.helper(node.left) - self.helper(node.right)) <= 1
+            
+        return walk(root)
+                
+        
+    @lru_cache(maxsize=None)
+    def helper(self, node):
+        if not node:
+            return 0
+        return 1 + max(self.helper(node.left), self.helper(node.right))
