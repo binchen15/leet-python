@@ -1,3 +1,4 @@
+# 5% solution
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         
@@ -62,3 +63,40 @@ class Solution:
             return 0
         l, r = self.helperLeft(node), self.helperRight(node)
         return l + r - node.val
+
+# recursion 25%
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+
+        self.ans = -sys.maxsize
+
+        def walk(node):
+            """max path sum from node downward, must include node.val itself"""
+
+            # if not node:
+            #     return 0 # should not happen
+
+            if not node.left and not node.right:
+                self.ans = max(self.ans, node.val)
+                return node.val
+
+            if node.left:
+                l = walk(node.left)
+
+            if node.right:
+                r = walk(node.right)
+
+            if node.left and node.right:
+                self.ans = max(self.ans, node.val + max(l, 0) + max(r, 0))
+                return node.val + max(l, r, 0)
+            elif node.left:
+                self.ans = max(self.ans, node.val + max(l, 0))
+                return node.val + max(l, 0)
+            else:
+                self.ans = max(self.ans, node.val + max(r, 0))
+                return node.val + max(r, 0)
+
+        walk(root)
+
+        return self.ans
+
