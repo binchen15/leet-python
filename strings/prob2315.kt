@@ -49,3 +49,13 @@ class Solution {
         
     }
 }
+
+// kotlin one liner
+class Solution {
+    fun countAsterisks(s: String): Int {
+        
+        return s.split("|").mapIndexed {i, word -> if (i % 2 == 0) word.count {it == '*'} else 0   } .sum() 
+        
+    }
+}
+
