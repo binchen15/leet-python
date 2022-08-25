@@ -16,3 +16,23 @@ class Solution {
 
     }
 }
+
+class Solution {
+    fun truncateSentence(s: String, k: Int): String {
+
+        val n = s.length
+        var i = 0
+        var cnt = 0
+        while (i < n) {
+            if (s[i] == ' ') {
+                cnt++
+                if (cnt == k) {
+                    return s.substring(0..(i-1))
+                }
+            }
+            i++
+        }
+        return s
+
+    }
+}
