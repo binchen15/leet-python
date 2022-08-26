@@ -16,7 +16,7 @@ class Solution {
         
         for (word in s1.keys) {
             //println(word.javaClass)
-            if (s1.getOrDefault(word, 0) == 1 &&  s2.getOrDefault(word, 0) == 1 ) {
+            if (word in s2 && s1.getOrDefault(word, 0) == 1 &&  s2.getOrDefault(word, 0) == 1 ) {
                 ans++
             }
         }
